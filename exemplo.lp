@@ -1,18 +1,23 @@
-min: 0.2 Vterm1 + 0.005 VRH1 + 0.2 Vterm2 + 0.005 VRH2 + 0.2 Vterm3 + 0.005 VRH3;
+min: 0.2 Vterm1 + 0.005 var1 + 0.2 Vterm2 + 0.005 var2 + 0.2 Vterm3 + 0.005 var3;
 Vini = 500;
 
 Y1 = 500;
 Y2 = 800;
 Y3 = 200;
 
-VRH1 = Y1 + Vat1;
-VRH2 = Y2 + Vat2;
-VRH3 = Y3 + Vat3;
-
 V1 = Vini + Y1 - Vat1;
 V2 = V1 + Y2 - Vat2;
 V3 = V2 + Y3 - Vat3;
 
+dif2 - dif1 = V1 - Vini;
+dif3 - dif2 = V2 - V1;
+dif4 - dif3 = V3 - V2;
+
+var1 = dif2 + dif1;
+var2 = dif3 + dif2;
+var3 = dif4 + dif3;
+
+/*------------------------------------acima está certo--------------------*/
 1.1 Vat1 + Vterm1 >= 900;
 1.1 Vat2 + Vterm2 >= 1000;
 1.1 Vat3 + Vterm3 >= 950;
