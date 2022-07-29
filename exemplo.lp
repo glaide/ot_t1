@@ -9,13 +9,19 @@ V1 = Vini + Y1 - Vat1;
 V2 = V1 + Y2 - Vat2;
 V3 = V2 + Y3 - Vat3;
 
-dif2 - dif1 = V1 - Vini;
-dif3 - dif2 = V2 - V1;
-dif4 - dif3 = V3 - V2;
+mvar1 - dif1 = V1 - Vini;
+mvar1 + dif1 = Vini - V1;
 
-var1 = dif2 + dif1;
-var2 = dif3 + dif2;
-var3 = dif4 + dif3;
+mvar2 - dif2 = V2 - V1;
+mvar2 + dif2 = V1 - V2;
+
+mvar3 - dif3 = V3 - V2;
+mvar3 + dif3 = V2 - V3;
+
+
+var1 = mvar1 + dif1;
+var2 = mvar2 + dif2;
+var3 = mvar3 + dif3;
 
 /*------------------------------------acima está certo--------------------*/
 1.1 Vat1 + Vterm1 >= 900;
