@@ -74,13 +74,42 @@ void print_hidro(int entrada, float ca, float termo)
     }
 }
 
-void print_restricoes(int entrada, float hidro, int demanda[])
+void print_restricoes(int entrada, float termo[], float hidro[], float hidroV, int demanda[])
 {
     printf("\n");
 
     for (int i = 0; i < entrada; i++)
     {
-        printf("%fVat%i + Vterm%i >= %i;\n", hidro, i + 1, i + 1, demanda[i]);
+        printf("%fVat%i + Vterm%i >= %i;\n", hidroV, i + 1, i + 1, demanda[i]);
+    }
+    for (int i = 1; i < entrada + 1; i++)
+    {
+        printf("V%i >= %f", i, hidro[1]);
+        printf(";\n");
+    }
+
+    for (int i = 1; i < entrada + 1; i++)
+    {
+        printf("V%i <= %f", i, hidro[2]);
+        printf(";\n");
+    }
+
+    for (int i = 1; i < entrada + 1; i++)
+    {
+        printf("Vterm%i <= %f", i, termo[0]);
+        printf(";\n");
+    }
+
+    for (int i = 1; i < entrada + 1; i++)
+    {
+        printf("Vterm%i >= 0", i);
+        printf(";\n");
+    }
+
+    for (int i = 1; i < entrada + 1; i++)
+    {
+        printf("Vat%i >= 0", i);
+        printf(";\n");
     }
 }
 
@@ -121,14 +150,14 @@ void print_volume(int entrada, int afluencia[])
     }
 }
 
-void print_lp(int entrada, float ca, int afluencia[], float hidro[], float termo, float hidroV, int demanda[])
+void print_lp(int entrada, float ca, int afluencia[], float termo[], float hidro[], float termoV, float hidroV, int demanda[])
 {
     print_func_obj(entrada);
-    print_hidro(entrada, ca, termo);
+    print_hidro(entrada, ca, termoV);
     printf("\n");
     printf("Vini = %.0f;\n", hidro[0]);
     print_volume(entrada, afluencia);
-    print_restricoes(entrada, hidroV, demanda);
+    print_restricoes(entrada, termo, hidro, hidroV, demanda);
 }
 
 int main()
@@ -140,7 +169,7 @@ int main()
 
     scanf("%f", &ca);
     float vMonth[entrada];
-    print_lp(entrada, ca, afluencia, hidro, termo[SIZE_TERMO - 1], hidro[SIZE_HIDRO - 1], demanda);
+    print_lp(entrada, ca, afluencia, termo, hidro, termo[SIZE_TERMO - 1], hidro[SIZE_HIDRO - 1], demanda);
     // print_entrada(entrada, demanda, afluencia, hidro, termo);
     // printf("%f \n", ca);
 }
